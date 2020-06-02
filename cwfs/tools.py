@@ -5,7 +5,6 @@
 # @       Large Synoptic Survey Telescope
 
 ##
-import os
 import sys
 import pkg_resources
 
@@ -410,7 +409,7 @@ def ZernikeGrad(Z, x, y, atype):
         d = d + Z[21] * np.sqrt(7) * 24 * x * (
             1 + x2 * (10 * y2 - 5 + 5 * x2) + y2 * (5 * y2 - 5))
 
-    elif (atype, 'dy'):
+    elif (atype == 'dy'):
 
         d = Z[0] * 0 * x
         d = d + Z[1] * 2 * 0
@@ -437,6 +436,10 @@ def ZernikeGrad(Z, x, y, atype):
         d = d + Z[20] * np.sqrt(12) * 5 * (x2 * (x2 - 6 * y2) + y2 * y2)
         d = d + Z[21] * np.sqrt(7) * 24 * y * (
             1 + y2 * (10 * x2 - 5 + 5 * y2) + x2 * (5 * x2 - 5))
+
+    else:
+        msg = f"Wrong atype, {atype}. Must be either 'dx' or 'dy'."
+        raise ValueError(msg)
 
     return d
 
@@ -812,12 +815,14 @@ def _poly10Grad(c, x, y, atype):
 
     return out
 
+
 try:
     __funcTable
 except NameError:
-    __funcTable = dict(poly10_2D=_poly10_2D,
-                       poly10Grad=_poly10Grad,
-                       )
+    __funcTable = dict(
+        poly10_2D=_poly10_2D,
+        poly10Grad=_poly10Grad,
+    )
 
 
 def getFunction(name):

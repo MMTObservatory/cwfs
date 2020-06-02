@@ -354,7 +354,7 @@ class Algorithm(object):
             self.zc = np.zeros(self.numTerms)
             idx = [x - 1 for x in self.ZTerms]
             for i in idx.copy():
-                if i+1>numTerms:
+                if i + 1 > numTerms:
                     idx.remove(i)
             # phi in GN paper is phase, phi/(2pi)*lambda=W
             zc_tmp = np.dot(np.linalg.pinv(self.Mij[:, idx][idx]), F[idx]) / dz

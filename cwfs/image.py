@@ -66,11 +66,11 @@ class Image(object):
         if self.image.shape[0] != self.image.shape[1]:
             print('original %s image size = (%d, %d)' % (
                 type, self.image.shape[0], self.image.shape[1]))
-            d = int(abs(self.image.shape[0] -  self.image.shape[1])/2)
-            if self.image.shape[0]<self.image.shape[1]:
-                self.image = self.image[:,d:self.image.shape[0]+d]
+            d = int(abs(self.image.shape[0] - self.image.shape[1])/2)
+            if self.image.shape[0] < self.image.shape[1]:
+                self.image = self.image[:, d:self.image.shape[0]+d]
             else:
-                self.image = self.image[d:self.image.shape[1]+d,:]
+                self.image = self.image[d:self.image.shape[1]+d, :]
             print('we cut it to (%d, %d)' % (
                 self.image.shape[0], self.image.shape[1]))
         elif self.image.shape[0] % 2 == 1:
@@ -161,8 +161,8 @@ class Image(object):
         for i in range(sm):
             for j in range(sn):
                 for k in range(oversample):
-                    for l in range(oversample):
-                        newI[i * oversample + k, j * oversample + l] = \
+                    for ll in range(oversample):
+                        newI[i * oversample + k, j * oversample + ll] = \
                             self.image[i, j] / oversample / oversample
         self.image = newI
 
@@ -251,7 +251,6 @@ class Image(object):
         show_lutxyp = tools.extractArray(show_lutxyp, projSamples)
 
         self.centerOnProjection(show_lutxyp.astype(float))
-
 
         # let's construct the interpolant,
         # to get the intensity on (x',p') plane
@@ -355,7 +354,7 @@ class Image(object):
         corr = correlate(self.image, template, mode='same')
         mask = np.zeros(corr.shape)
         r = window // 2
-        mask[center-r:center+r,center-r:center+r] = 1
+        mask[center-r:center+r, center-r:center+r] = 1
         idx = np.argmax(corr * mask)
         xmatch = (idx // length)
         ymatch = (idx % length)
@@ -713,20 +712,25 @@ def showProjection(lutxp, lutyp, sensorFactor, projSamples, raytrace):
     xR = np.zeros((n1, n2))
     yR = np.zeros((n1, n2))
     # x=0.5 is center of pixel#1
-    xR[idx] = np.round((lutxp[idx] + sensorFactor) *
-                  (projSamples / sensorFactor) / 2 + 0.5)
-    yR[idx] = np.round((lutyp[idx] + sensorFactor) *
-                  (projSamples / sensorFactor) / 2 + 0.5)
+    xR[idx] = np.round(
+        (lutxp[idx] + sensorFactor) * (projSamples / sensorFactor) / 2 + 0.5
+    )
+    yR[idx] = np.round(
+        (lutyp[idx] + sensorFactor) * (projSamples / sensorFactor) / 2 + 0.5
+    )
     mask = np.bitwise_and(
         np.bitwise_and(
-            np.bitwise_and(xR > 0,
-                           xR < n2),
-            yR > 0),
+            np.bitwise_and(
+                xR > 0,
+                xR < n2
+            ),
+            yR > 0
+        ),
         yR < n1
     )
 
     if raytrace:
-        for i,j in zip(np.array(yR - 1, dtype=int)[mask],np.array(xR - 1, dtype=int)[mask]):
+        for i, j in zip(np.array(yR - 1, dtype=int)[mask], np.array(xR - 1, dtype=int)[mask]):
             show_lutxyp[i,j] += 1
     else:
         show_lutxyp[np.array(yR - 1, dtype=int)[mask],
