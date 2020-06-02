@@ -12,7 +12,7 @@ from . import tools
 class Instrument(object):
 
     def __init__(self, instruFile, sensorSamples):
-        self.instDir = os.path.join(tools.getDataDir(), instruFile)
+        self.instDir = os.path.join(tools.getDataDir(), "config", instruFile)
         self.filename = os.path.join(self.instDir, (instruFile + '.param'))
         fid = open(self.filename)
         iscomment = False

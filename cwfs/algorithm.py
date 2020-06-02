@@ -20,7 +20,7 @@ class Algorithm(object):
 
     def __init__(self, algoFile, inst, debugLevel):
         algoDir = os.path.join(tools.getDataDir(), "algo")
-        self.filename = os.path.join(algoDir, "%s.algo" % algoFile)
+        self.filename = os.path.join(algoDir, f"{algoFile}.algo")
         fid = open(self.filename)
 
         iscomment = False
