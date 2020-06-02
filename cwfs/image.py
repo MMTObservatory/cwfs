@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-##
 # @package cwfs
 # @file image.py
 ##
@@ -19,7 +17,7 @@ from scipy.ndimage import center_of_mass
 from scipy.signal import correlate
 
 from . import tools
-from lsst.cwfs.tools import ZernikeAnnularGrad, ZernikeGrad, \
+from .tools import ZernikeAnnularGrad, ZernikeGrad, \
     ZernikeAnnularJacobian, ZernikeJacobian
 
 
@@ -155,7 +153,6 @@ class Image(object):
             self.fldr)
 
     def upResolution(self, oversample, lm, ln):
-
         # lm and ln are dimensions after upResolution
         sm = lm / oversample
         sn = ln / oversample
@@ -170,9 +167,7 @@ class Image(object):
         self.image = newI
 
     def downResolution(self, oversample, sm, sn):
-
         # sm and sn are dimensions after downResolution
-
         newI = np.zeros((sm, sn))
         for i in range(sm):
             for j in range(sn):
@@ -369,11 +364,13 @@ class Image(object):
 
         self.image = np.roll(np.roll(self.image, dx, axis=0), dy, axis=1)
 
+
 def getCenter(image):
     cut = filters.threshold_otsu(image)
     mask = image > cut
     y, x = center_of_mass(mask)
     return x, y
+
 
 def linear2D(xydata, c00, c10, c01):
     (x, y) = xydata
@@ -465,8 +462,11 @@ def rotateMaskParam(ca, cb, fieldX, fieldY):
 
     return cax, cay, cbx, cby
 
+
 def createPupilGrid(lutx, luty, onepixel, ca, cb, ra, rb, fieldX, fieldY=None):
-    """Create the pupil grid"""
+    """
+    Create the pupil grid
+    """
 
     if (fieldY is None):
         fldr = fieldX
@@ -499,7 +499,6 @@ def createPupilGrid(lutx, luty, onepixel, ca, cb, ra, rb, fieldX, fieldY=None):
 
 
 def aperture2image(Im, inst, algo, zcCol, lutx, luty, projSamples, model):
-
     R = inst.apertureDiameter / 2.0
     if (Im.type == 'intra'):
         myC = - inst.focalLength * \

@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-##
 # @package cwfs
 # @file algorithm.py
 ##
@@ -392,8 +390,7 @@ class Algorithm(object):
                 I1.type, I1.image.shape[0], I1.image.shape[1]))
             print('%s image size = (%d, %d) ' % (
                 I2.type, I2.image.shape[0], I2.image.shape[1]))
-            print('Error: The intra and extra image stamps need to \
-be of same size.')
+            print('Error: The intra and extra image stamps need to be of same size.')
             sys.exit()
 
         # pupil mask, computational mask, and their parameters

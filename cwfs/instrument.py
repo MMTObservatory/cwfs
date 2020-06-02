@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-##
 # @package cwfs
 # @file instrument.py
 ##

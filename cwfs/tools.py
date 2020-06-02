@@ -1,7 +1,5 @@
-#!/usr/bin/env python
-##
 # @package cwfs
-# @file cwfsTools.py
+# @file tools.py
 ##
 # @authors: Bo Xin & Chuck Claver
 # @       Large Synoptic Survey Telescope
@@ -9,9 +7,11 @@
 ##
 import os
 import sys
+import pkg_resources
+
 import numpy as np
 
-from lsst.cwfs.errors import unknownUnitError
+from .errors import unknownUnitError
 
 
 def padArray(inArray, dim):
@@ -21,7 +21,7 @@ def padArray(inArray, dim):
 
     if not isinstance(dim, int):
         raise Exception('padArray, output dimension needs to be integer')
-    
+
     if m > dim:
         raise Exception('padArray: array is larger than dimension')
 
@@ -958,7 +958,7 @@ def ZernikeEval(Z, x, y):
     S = S + Z[25] * np.sqrt(14) * (6 * r6 - 5 * r4) * c4
     S = S + Z[26] * np.sqrt(14) * r6 * s6
     S = S + Z[27] * np.sqrt(14) * r6 * c6
-    
+
     return S
 
 
@@ -1174,9 +1174,8 @@ def outZer4Up(z, unit, filename=''):
 
 
 def getDataDir():
-    """Return the directory where data is to be found
-
-    N.b. this needs to be rethought, but it's OK for now"""
-
-    cwfsSrcDir = os.path.split(os.path.abspath(__file__))[0]
-    return os.path.join(cwfsSrcDir, '..', '..', '..', 'data')
+    """
+    Return the directory where data is to be found using pkg_resources
+    """
+    cwfs_datadir = pkg_resources.resource_filename("cwfs", "data")
+    return cwfs_datadir
