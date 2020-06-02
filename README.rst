@@ -9,12 +9,17 @@ Utilities for performing curvature wavefront sensing
     :target: https://github.com/MMTObservatory/cwfs/actions?query=workflow%3A%22Python+Tests%22
     :alt: Python Tests
 
+.. image:: https://codecov.io/gh/MMTObservatory/cwfs/branch/master/graph/badge.svg
+  :target: https://codecov.io/gh/MMTObservatory/cwfs
+  :alt: Codecov Status
+
 This is a refactoring of the LSST CWFS code available at https://github.com/bxin/cwfs
 to make it more easily installable as a standalone python package. Some modifications
 are made to add configuration data for the MMTO and Kuiper telescopes as well as to improve
 performance and accuracy in the presense of significant focus offsets.
 
-If you use this code, please reference Xin et al., Appl. Opt. 54, 9045-9054 (2015).
+If you use this code, please reference `Xin et al., Appl. Opt. 54, 9045-9054 (2015)
+<https://ui.adsabs.harvard.edu/abs/2015ApOpt..54.9045X/abstract>`_.
 
 License
 -------
