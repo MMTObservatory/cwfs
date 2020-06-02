@@ -1,4 +1,24 @@
-# Licensed under a 3-clause BSD style license - see LICENSE.rst
+#
+# LSST Data Management System
+# Copyright 2008, 2009, 2010 LSST Corporation.
+#
+# This product includes software developed by the
+# LSST Project (http://www.lsst.org/).
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the LSST License Statement and
+# the GNU General Public License along with this program.  If not,
+# see <http://www.lsstcorp.org/LegalNotices/>.
+#
 
 # Packages may add whatever they like to this file, but
 # should keep this content at the top.
@@ -7,8 +27,3 @@ from ._astropy_init import *   # noqa
 # ----------------------------------------------------------------------------
 
 __all__ = []
-from .example_mod import *   # noqa
-# Then you can be explicit to control what ends up in the namespace,
-__all__ += ['do_primes']   # noqa
-# or you can keep everything from the subpackage with the following instead
-# __all__ += example_mod.__all__
