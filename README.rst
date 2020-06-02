@@ -5,6 +5,10 @@ Utilities for performing curvature wavefront sensing
     :target: http://www.astropy.org
     :alt: Powered by Astropy Badge
 
+.. image:: https://github.com/MMTObservatory/cwfs/workflows/Python%20Tests/badge.svg
+    :target: https://github.com/MMTObservatory/cwfs/actions?query=workflow%3A%22Python+Tests%22
+    :alt: Python Tests
+
 This is a refactoring of the LSST CWFS code available at https://github.com/bxin/cwfs
 to make it more easily installable as a standalone python package. Some modifications
 are made to add configuration data for the MMTO and Kuiper telescopes as well as to improve
