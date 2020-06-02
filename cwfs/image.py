@@ -731,7 +731,7 @@ def showProjection(lutxp, lutyp, sensorFactor, projSamples, raytrace):
 
     if raytrace:
         for i, j in zip(np.array(yR - 1, dtype=int)[mask], np.array(xR - 1, dtype=int)[mask]):
-            show_lutxyp[i,j] += 1
+            show_lutxyp[i, j] += 1
     else:
         show_lutxyp[np.array(yR - 1, dtype=int)[mask],
                     np.array(xR - 1, dtype=int)[mask]] = 1
